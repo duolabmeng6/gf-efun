@@ -1,4 +1,4 @@
-package gf_efun
+package gfefun
 
 const VERSION = "v1.15.5"
 const AUTHORS = "john<john@goframe.org>"
