@@ -4,8 +4,8 @@
 // If a copy of the MIT was not distributed with this file,
 // You can obtain one at https://github.com/gogf/gf.
 
-// Package gcache provides kinds of cache management for process.
-// It default provides a concurrent-safe in-memory cache adapter for process.
+// gcache包为进程提供了各种缓存管理。
+// 默认情况下，它为进程提供了一个并发安全的内存缓存适配器。
 package gcache
 
 import (

@@ -1,4 +1,4 @@
-module github.com/duolabmeng6/gfefun
+module github.com/gogf/gf
 
 go 1.14
 
