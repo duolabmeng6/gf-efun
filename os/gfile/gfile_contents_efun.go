@@ -17,72 +17,72 @@ import (
 
 
 
-// GetContents返回<path>的文件内容作为字符串。
+// GetContents返回<路径>的文件内容作为字符串。
 //如果读取失败，返回一个空字符串。
-func E读入文本(path string) string {
-	return gconv.UnsafeBytesToStr(GetBytes(path))
+func E读入文本(路径 string) string {
+	return gconv.UnsafeBytesToStr(GetBytes(路径))
 }
 
-// GetBytes返回<path>的文件内容作为[]字节。
+// GetBytes返回<路径>的文件内容作为[]字节。
 //如果读取失败，返回nil。
-func E读入文件(path string) []byte {
-	data, err := ioutil.ReadFile(path)
+func E读入文件(路径 string) []byte {
+	data, err := ioutil.ReadFile(路径)
 	if err != nil {
 		return nil
 	}
 	return data
 }
 
-// putContents将二进制内容放入<path>的文件中。
-func E写到文件2(path string, data []byte, flag int, perm os.FileMode) error {
-	// It supports creating file of <path> recursively.
-	dir := Dir(path)
+// putContents将二进制内容放入<路径>的文件中。
+func E写到文件2(路径 string, 欲写出的字节集 []byte, flag int, perm os.FileMode) error {
+	// It supports creating file of <路径> recursively.
+	dir := Dir(路径)
 	if !Exists(dir) {
 		if err := Mkdir(dir); err != nil {
 			return err
 		}
 	}
 	// Opening file with given <flag> and <perm>.
-	f, err := OpenWithFlagPerm(path, flag, perm)
+	f, err := OpenWithFlagPerm(路径, flag, perm)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
-	if n, err := f.Write(data); err != nil {
+	if n, err := f.Write(欲写出的字节集); err != nil {
 		return err
-	} else if n < len(data) {
+	} else if n < len(欲写出的字节集) {
 		return io.ErrShortWrite
 	}
 	return nil
 }
 
-// Truncate通过<size>将<path>的文件截断到给定的大小。
-func E截断文件(path string, size int) error {
-	return os.Truncate(path, int64(size))
+// Truncate通过<size>将<路径>的文件截断到给定的大小。
+func E截断文件(路径 string, 大小 int) error {
+	return os.Truncate(路径, int64(大小))
 }
 
-// PutContents将字符串<content>放到<path>的文件中。
-//如果文件不存在，则递归创建<path>的文件。
+// PutContents将字符串<content>放到<路径>的文件中。
+//如果文件不存在，则递归创建<路径>的文件。
 //函数返回路径字符串，返回内容字符串
-// return putContents(path， []byte(content)， os. o_wronly |os. o_create |os。DefaultPermOpen O_TRUNC)
+// return putContents(路径， []byte(content)， os. o_wronly |os. o_create |os。DefaultPermOpen O_TRUNC)
 // }
 
-// PutContentsAppend将string <content>追加到<path>的文件。
-//如果文件不存在，则递归创建<path>的文件。
-func E写到文件追加文本(path string, content string) error {
-	return putContents(path, []byte(content), os.O_WRONLY|os.O_CREATE|os.O_APPEND, DefaultPermOpen)
+// PutContentsAppend将string <content>追加到<路径>的文件。
+//如果文件不存在，则递归创建<路径>的文件。
+func E写到文件追加文本(路径 string, 欲写出的内容 string) error {
+	return putContents(路径, []byte(欲写出的内容), os.O_WRONLY|os.O_CREATE|os.O_APPEND, DefaultPermOpen)
 }
 
-// PutBytes把<content>的二进制文件放到<path>的文件中。
-//如果文件不存在，则递归创建<path>的文件。
-func E写到文件(path string, content []byte) error {
-	return putContents(path, content, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, DefaultPermOpen)
+// PutBytes把<content>的二进制文件放到<路径>的文件中。
+//如果文件不存在，则递归创建<路径>的文件。
+func E写到文件(路径 string, 欲写出的字节集 []byte) error {
+	return putContents(路径, 欲写出的字节集, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, DefaultPermOpen)
 }
 
-//将二进制<content>追加到<path>的文件。
-//如果文件不存在，则递归创建<path>的文件。
-func E写到文件追加字节集(path string, content []byte) error {
-	return putContents(path, content, os.O_WRONLY|os.O_CREATE|os.O_APPEND, DefaultPermOpen)
+//将二进制<content>追加到<路径>的文件。
+//如果文件不存在，则递归创建<路径>的文件。
+func E写到文件追加字节集(路径 string, 欲写出的字节集 []byte) error {
+	return putContents(路径, 欲写出的字节集, os.O_WRONLY|os.O_CREATE|os.O_APPEND, DefaultPermOpen)
 }
 
 // 返回给定<char>从<start>开始的文件偏移量。
@@ -105,9 +105,9 @@ func E寻找字节集(reader io.ReaderAt, char byte, start int64) int64 {
 }
 
 // GetNextCharOffsetByPath返回给定的<char>从<start>开始的文件偏移量。
-//打开一个<path>的文件供os读取。O_RDONLY标志和默认选项。
-func E寻找字节集从路径(path string, char byte, start int64) int64 {
-	if f, err := OpenWithFlagPerm(path, os.O_RDONLY, DefaultPermOpen); err == nil {
+//打开一个<路径>的文件供os读取。O_RDONLY标志和默认选项。
+func E寻找字节集从路径(路径 string, char byte, start int64) int64 {
+	if f, err := OpenWithFlagPerm(路径, os.O_RDONLY, DefaultPermOpen); err == nil {
 		defer f.Close()
 		return GetNextCharOffset(f, char, start)
 	}
@@ -125,13 +125,13 @@ func E取字节集从某字节开始(reader io.ReaderAt, char byte, start int64)
 	return nil, -1
 }
 
-// GetBytesTilCharByPath返回<path>以[]字节的形式给出的文件内容
+// GetBytesTilCharByPath返回<路径>以[]字节的形式给出的文件内容
 //直到下一个指定的字节<char>的位置。
-//打开一个<path>的文件供os读取。O_RDONLY标志和默认烫发。
+//打开一个<路径>的文件供os读取。O_RDONLY标志和默认烫发。
 //
 //注意:返回值包含最后一个位置的字符。
-func E取字节集从某字节开始从文件(path string, char byte, start int64) ([]byte, int64) {
-	if f, err := OpenWithFlagPerm(path, os.O_RDONLY, DefaultPermOpen); err == nil {
+func E取字节集从某字节开始从文件(路径 string, char byte, start int64) ([]byte, int64) {
+	if f, err := OpenWithFlagPerm(路径, os.O_RDONLY, DefaultPermOpen); err == nil {
 		defer f.Close()
 		return GetBytesTilChar(f, char, start)
 	}
@@ -152,9 +152,9 @@ func E取字节集中间(reader io.ReaderAt, start int64, end int64) []byte {
 // GetBytesByTwoOffsetsByPath返回二进制内容[]字节从<start>到<end>。
 //注意:返回值不包含最后一个位置的字符，这意味着
 //它返回的内容范围为[start, end)。
-//打开一个<path>的文件供os读取。O_RDONLY标志和默认烫发。
-func E取字节集中间从路径(path string, start int64, end int64) []byte {
-	if f, err := OpenWithFlagPerm(path, os.O_RDONLY, DefaultPermOpen); err == nil {
+//打开一个<路径>的文件供os读取。O_RDONLY标志和默认烫发。
+func E取字节集中间从路径(路径 string, start int64, end int64) []byte {
+	if f, err := OpenWithFlagPerm(路径, os.O_RDONLY, DefaultPermOpen); err == nil {
 		defer f.Close()
 		return GetBytesByTwoOffsets(f, start, end)
 	}
