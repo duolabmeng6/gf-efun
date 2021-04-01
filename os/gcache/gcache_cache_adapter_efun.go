@@ -11,110 +11,110 @@ import (
 )
 
 
-// Set用<key>-<value> pair设置缓存，在<duration>后过期。
+// Set用<键>-<值> pair设置缓存，在<时间>后过期。
 //
-// 如果<duration> == 0，则它不会过期。
-// 如果<duration> < 0，则删除<键>。
-func (c *Cache) E设置(key interface{}, value interface{}, duration time.Duration) error {
-	return c.adapter.Set(c.getCtx(), key, value, duration)
+// 如果<时间> == 0，则它不会过期。
+// 如果<时间> < 0，则删除<键>。
+func (c *Cache) E设置(键 interface{}, 值 interface{}, 时间 time.Duration) error {
+	return c.adapter.Set(c.getCtx(), 键, 值, 时间)
 }
 
-// 通过<data>设置批量设置缓存的键值对，该键值对在<duration>之后过期。
+// 通过<data>设置批量设置缓存的键值对，该键值对在<时间>之后过期。
 //
-// It does not expire if <duration> == 0.
-// It deletes the keys of <data> if <duration> < 0 or given <value> is nil.
-func (c *Cache) E设置集合(data map[interface{}]interface{}, duration time.Duration) error {
-	return c.adapter.Sets(c.getCtx(), data, duration)
+// It does not expire if <时间> == 0.
+// It deletes the 键s of <data> if <时间> < 0 or given <值> is nil.
+func (c *Cache) E设置集合(data map[interface{}]interface{}, 时间 time.Duration) error {
+	return c.adapter.Sets(c.getCtx(), data, 时间)
 }
 
-// SetIfNotExist sets cache with <key>-<value> pair which is expired after <duration>
-// if <key> does not exist in the cache. It returns true the <key> dose not exist in the
-// cache and it sets <value> successfully to the cache, or else it returns false.
+// SetIfNotExist sets cache with <键>-<值> pair which is expired after <时间>
+// if <键> does not exist in the cache. It returns true the <键> dose not exist in the
+// cache and it sets <值> successfully to the cache, or else it returns false.
 //
-// The parameter <value> can be type of <func() interface{}>, but it dose nothing if its
+// The parameter <值> can be type of <func() interface{}>, but it dose nothing if its
 // result is nil.
 //
-// It does not expire if <duration> == 0.
-// It deletes the <key> if <duration> < 0 or given <value> is nil.
-func (c *Cache) E设置不存在时写入(key interface{}, value interface{}, duration time.Duration) (bool, error) {
-	return c.adapter.SetIfNotExist(c.getCtx(), key, value, duration)
+// It does not expire if <时间> == 0.
+// It deletes the <键> if <时间> < 0 or given <值> is nil.
+func (c *Cache) E设置不存在时写入(键 interface{}, 值 interface{}, 时间 time.Duration) (bool, error) {
+	return c.adapter.SetIfNotExist(c.getCtx(), 键, 值, 时间)
 }
 
-// Get retrieves and returns the associated value of given <key>.
-// It returns nil if it does not exist, its value is nil or it's expired.
-func (c *Cache) E获取(key interface{}) (interface{}, error) {
-	return c.adapter.Get(c.getCtx(), key)
+// Get retrieves and returns the associated 值 of given <键>.
+// It returns nil if it does not exist, its 值 is nil or it's expired.
+func (c *Cache) E获取(键 interface{}) (interface{}, error) {
+	return c.adapter.Get(c.getCtx(), 键)
 }
 
-// GetOrSet retrieves and returns the value of <key>, or sets <key>-<value> pair and
-// returns <value> if <key> does not exist in the cache. The key-value pair expires
-// after <duration>.
+// GetOrSet retrieves and returns the 值 of <键>, or sets <键>-<值> pair and
+// returns <值> if <键> does not exist in the cache. The 键-值 pair expires
+// after <时间>.
 //
-// It does not expire if <duration> == 0.
-// It deletes the <key> if <duration> < 0 or given <value> is nil, but it does nothing
-// if <value> is a function and the function result is nil.
-func (c *Cache) E获取或设置(key interface{}, value interface{}, duration time.Duration) (interface{}, error) {
-	return c.adapter.GetOrSet(c.getCtx(), key, value, duration)
+// It does not expire if <时间> == 0.
+// It deletes the <键> if <时间> < 0 or given <值> is nil, but it does nothing
+// if <值> is a function and the function result is nil.
+func (c *Cache) E获取或设置(键 interface{}, 值 interface{}, 时间 time.Duration) (interface{}, error) {
+	return c.adapter.GetOrSet(c.getCtx(), 键, 值, 时间)
 }
 
-// GetOrSetFunc retrieves and returns the value of <key>, or sets <key> with result of
-// function <f> and returns its result if <key> does not exist in the cache. The key-value
-// pair expires after <duration>.
+// GetOrSetFunc retrieves and returns the 值 of <键>, or sets <键> with result of
+// function <f> and returns its result if <键> does not exist in the cache. The 键-值
+// pair expires after <时间>.
 //
-// It does not expire if <duration> == 0.
-// It deletes the <key> if <duration> < 0 or given <value> is nil, but it does nothing
-// if <value> is a function and the function result is nil.
-func (c *Cache) E获取或设置函数(key interface{}, f func() (interface{}, error), duration time.Duration) (interface{}, error) {
-	return c.adapter.GetOrSetFunc(c.getCtx(), key, f, duration)
+// It does not expire if <时间> == 0.
+// It deletes the <键> if <时间> < 0 or given <值> is nil, but it does nothing
+// if <值> is a function and the function result is nil.
+func (c *Cache) E获取或设置函数(键 interface{}, f func() (interface{}, error), 时间 time.Duration) (interface{}, error) {
+	return c.adapter.GetOrSetFunc(c.getCtx(), 键, f, 时间)
 }
 
-// GetOrSetFuncLock retrieves and returns the value of <key>, or sets <key> with result of
-// function <f> and returns its result if <key> does not exist in the cache. The key-value
-// pair expires after <duration>.
+// GetOrSetFuncLock retrieves and returns the 值 of <键>, or sets <键> with result of
+// function <f> and returns its result if <键> does not exist in the cache. The 键-值
+// pair expires after <时间>.
 //
-// It does not expire if <duration> == 0.
+// It does not expire if <时间> == 0.
 // It does nothing if function <f> returns nil.
 //
 // Note that the function <f> should be executed within writing mutex lock for concurrent
 // safety purpose.
-func (c *Cache) E获取或设置函数锁(key interface{}, f func() (interface{}, error), duration time.Duration) (interface{}, error) {
-	return c.adapter.GetOrSetFuncLock(c.getCtx(), key, f, duration)
+func (c *Cache) E获取或设置函数锁(键 interface{}, f func() (interface{}, error), 时间 time.Duration) (interface{}, error) {
+	return c.adapter.GetOrSetFuncLock(c.getCtx(), 键, f, 时间)
 }
 
-// Contains returns true if <key> exists in the cache, or else returns false.
-func (c *Cache) E是否存在(key interface{}) (bool, error) {
-	return c.adapter.Contains(c.getCtx(), key)
+// Contains returns true if <键> exists in the cache, or else returns false.
+func (c *Cache) E是否存在(键 interface{}) (bool, error) {
+	return c.adapter.Contains(c.getCtx(), 键)
 }
 
-// GetExpire retrieves and returns the expiration of <key> in the cache.
+// GetExpire retrieves and returns the expiration of <键> in the cache.
 //
-// It returns 0 if the <key> does not expire.
-// It returns -1 if the <key> does not exist in the cache.
-func (c *Cache) E获取超时时间(key interface{}) (time.Duration, error) {
-	return c.adapter.GetExpire(c.getCtx(), key)
+// It returns 0 if the <键> does not expire.
+// It returns -1 if the <键> does not exist in the cache.
+func (c *Cache) E获取超时时间(键 interface{}) (time.Duration, error) {
+	return c.adapter.GetExpire(c.getCtx(), 键)
 }
 
 // Remove从缓存中删除一个或多个键，并返回其值。
 // 如果给出了多个键，则返回最后删除的项的值。
-func (c *Cache) E移除(keys ...interface{}) (value interface{}, err error) {
-	return c.adapter.Remove(c.getCtx(), keys...)
+func (c *Cache) E删除(键 ...interface{}) (值 interface{}, err error) {
+	return c.adapter.Remove(c.getCtx(), 键...)
 }
 
-// Update更新<key>的值而不改变它的过期时间，并返回旧的值。
-// 如果<key>在缓存中不存在，则返回值<exist>为false。
+// Update更新<键>的值而不改变它的过期时间，并返回旧的值。
+// 如果<键>在缓存中不存在，则返回值<exist>为false。
 //
-// 如果给定<value>为nil，则删除<key>。
-// 如果<key>不存在于缓存中，则不执行任何操作。
-func (c *Cache) E更新(key interface{}, value interface{}) (oldValue interface{}, exist bool, err error) {
-	return c.adapter.Update(c.getCtx(), key, value)
+// 如果给定<值>为nil，则删除<键>。
+// 如果<键>不存在于缓存中，则不执行任何操作。
+func (c *Cache) E更新(键 interface{}, 值 interface{}) (oldValue interface{}, exist bool, err error) {
+	return c.adapter.Update(c.getCtx(), 键, 值)
 }
 
-// UpdateExpire更新<key>的过期时间，并返回旧的过期时间值。
+// UpdateExpire更新<键>的过期时间，并返回旧的过期时间值。
 //
-// 如果<key>在缓存中不存在，则返回-1，不执行任何操作。
-// 如果<duration> < 0，则删除<键>。
-func (c *Cache) E更新过期时间(key interface{}, duration time.Duration) (oldDuration time.Duration, err error) {
-	return c.adapter.UpdateExpire(c.getCtx(), key, duration)
+// 如果<键>在缓存中不存在，则返回-1，不执行任何操作。
+// 如果<时间> < 0，则删除<键>。
+func (c *Cache) E更新过期时间(键 interface{}, 时间 time.Duration) (oldDuration time.Duration, err error) {
+	return c.adapter.UpdateExpire(c.getCtx(), 键, 时间)
 }
 
 // Size返回缓存中的项数。

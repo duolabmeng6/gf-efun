@@ -50,29 +50,29 @@ func (c *Cache) E设置适配器(adapter Adapter) {
 	c.adapter = adapter
 }
 
-// GetVar retrieves and returns the value of <key> as gvar.Var.
-func (c *Cache) E获取Var(key interface{}) (*gvar.Var, error) {
-	v, err := c.Get(key)
+// GetVar retrieves and returns the value of <键> as gvar.Var.
+func (c *Cache) E获取变量(键 interface{}) (*gvar.Var, error) {
+	v, err := c.Get(键)
 	return gvar.New(v), err
 }
 
-// Removes deletes <keys> in the cache.
-// Deprecated, use Remove instead.
-func (c *Cache) E删除(keys []interface{}) error {
-	_, err := c.Remove(keys...)
-	return err
-}
+// 在缓存中删除删除<键>。
+// 已弃用，请使用Remove代替。
+//func (c *Cache) E删除(键 []interface{}) error {
+//	_, err := c.Remove(键...)
+//	return err
+//}
 
-// KeyStrings returns all keys in the cache as string slice.
+// KeyStrings returns all 键s in the cache as string slice.
 func (c *Cache) E获取所有键文本() ([]string, error) {
-	keys, err := c.Keys()
+	键, err := c.Keys()
 	if err != nil {
 		return nil, err
 	}
-	return gconv.Strings(keys), nil
+	return gconv.Strings(键), nil
 }
 
-// KeyStrings returns all keys in the cache as string slice.
+// KeyStrings returns all 键 in the cache as string slice.
 func (c *Cache) E获取上下文() context.Context {
 	if c.ctx == nil {
 		return context.Background()
