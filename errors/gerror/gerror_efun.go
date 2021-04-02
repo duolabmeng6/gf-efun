@@ -26,7 +26,7 @@ func E新建(text string) error {
 }
 
 // Newf returns an error that formats as the given format and args.
-func E新建格式化(format string, args ...interface{}) error {
+func E新建自定义(format string, args ...interface{}) error {
 	return &Error{
 		stack: callers(),
 		text:  fmt.Sprintf(format, args...),
@@ -34,7 +34,7 @@ func E新建格式化(format string, args ...interface{}) error {
 	}
 }
 
-// NewSkip创建并返回一个根据给定文本格式化的错误。
+// NewSkip创建并返回一个根据给定文本自定义的错误。
 ////参数<skip>指定了堆栈调用方的跳过数量。
 func E新建跳过(skip int, text string) error {
 	return &Error{
@@ -44,9 +44,9 @@ func E新建跳过(skip int, text string) error {
 	}
 }
 
-// NewSkipf返回一个错误，格式化为给定的格式和参数。
+// NewSkipf返回一个错误，自定义为给定的格式和参数。
 //参数<skip>指定了堆栈调用方的跳过数量。
-func E新建跳过格式化(skip int, format string, args ...interface{}) error {
+func E新建跳过自定义(skip int, format string, args ...interface{}) error {
 	return &Error{
 		stack: callers(skip),
 		text:  fmt.Sprintf(format, args...),
@@ -56,7 +56,7 @@ func E新建跳过格式化(skip int, format string, args ...interface{}) error 
 
 // Wrap Wrap error with text。
 //如果给定err为nil，则返回nil。
-func E包(err error, text string) error {
+func E提示(err error, text string) error {
 	if err == nil {
 		return nil
 	}
@@ -71,7 +71,7 @@ func E包(err error, text string) error {
 // Wrapf returns an error annotating err with a stack trace
 // at the point Wrapf is called, and the format specifier.
 // It returns nil if given <err> is nil.
-func E包格式化(err error, format string, args ...interface{}) error {
+func E自定义(err error, format string, args ...interface{}) error {
 	if err == nil {
 		return nil
 	}
@@ -86,7 +86,7 @@ func E包格式化(err error, format string, args ...interface{}) error {
 // WrapSkip wraps error with text.
 // It returns nil if given err is nil.
 // The parameter <skip> specifies the stack callers skipped amount.
-func E包跳过(skip int, err error, text string) error {
+func E跳过(skip int, err error, text string) error {
 	if err == nil {
 		return nil
 	}
@@ -101,7 +101,7 @@ func E包跳过(skip int, err error, text string) error {
 // WrapSkipf wraps error with text that is formatted with given format and args.
 // It returns nil if given err is nil.
 // The parameter <skip> specifies the stack callers skipped amount.
-func E包跳过格式化(skip int, err error, format string, args ...interface{}) error {
+func E跳过自定义(skip int, err error, format string, args ...interface{}) error {
 	if err == nil {
 		return nil
 	}
@@ -114,7 +114,7 @@ func E包跳过格式化(skip int, err error, format string, args ...interface{}
 }
 
 // NewCode creates and returns an error that has error code and given text.
-func E新建代码(code int, text string) error {
+func E提示错误(code int, text string) error {
 	return &Error{
 		stack: callers(),
 		text:  text,
@@ -123,7 +123,7 @@ func E新建代码(code int, text string) error {
 }
 
 // NewCodef returns an error that has error code and formats as the given format and args.
-func E新建代码格式化(code int, format string, args ...interface{}) error {
+func E提示错误自定义(code int, format string, args ...interface{}) error {
 	return &Error{
 		stack: callers(),
 		text:  fmt.Sprintf(format, args...),
@@ -133,7 +133,7 @@ func E新建代码格式化(code int, format string, args ...interface{}) error 
 
 // NewCodeSkip creates and returns an error which has error code and is formatted from given text.
 // The parameter <skip> specifies the stack callers skipped amount.
-func E新建代码跳过(code, skip int, text string) error {
+func E提示错误跳过(code, skip int, text string) error {
 	return &Error{
 		stack: callers(skip),
 		text:  text,
@@ -143,7 +143,7 @@ func E新建代码跳过(code, skip int, text string) error {
 
 // NewCodeSkipf returns an error that has error code and formats as the given format and args.
 // The parameter <skip> specifies the stack callers skipped amount.
-func E新建代码跳过格式化(code, skip int, format string, args ...interface{}) error {
+func E提示错误跳过自定义(code, skip int, format string, args ...interface{}) error {
 	return &Error{
 		stack: callers(skip),
 		text:  fmt.Sprintf(format, args...),
@@ -153,7 +153,7 @@ func E新建代码跳过格式化(code, skip int, format string, args ...interfa
 
 // WrapCode wraps error with code and text.
 // It returns nil if given err is nil.
-func E包代码(code int, err error, text string) error {
+func E提示错误代码(code int, err error, text string) error {
 	if err == nil {
 		return nil
 	}
@@ -167,7 +167,7 @@ func E包代码(code int, err error, text string) error {
 
 // WrapCodef wraps error with code and format specifier.
 // It returns nil if given <err> is nil.
-func E包代码格式化(code int, err error, format string, args ...interface{}) error {
+func E提示错误代码自定义(code int, err error, format string, args ...interface{}) error {
 	if err == nil {
 		return nil
 	}
@@ -182,7 +182,7 @@ func E包代码格式化(code int, err error, format string, args ...interface{}
 // WrapCodeSkip wraps error with code and text.
 // It returns nil if given err is nil.
 // The parameter <skip> specifies the stack callers skipped amount.
-func E包代码跳过(code, skip int, err error, text string) error {
+func E提示错误代码跳过(code, skip int, err error, text string) error {
 	if err == nil {
 		return nil
 	}
@@ -194,10 +194,10 @@ func E包代码跳过(code, skip int, err error, text string) error {
 	}
 }
 
-// WrapCodeSkipf用给定格式和参数格式化的代码和文本包装错误。
+// WrapCodeSkipf用给定格式和参数自定义的代码和文本包装错误。
 //如果给定err为nil，则返回nil。
 //参数<skip>指定了堆栈调用方的跳过数量。
-func E包代码跳过格式化(code, skip int, err error, format string, args ...interface{}) error {
+func E提示错误代码跳过自定义(code, skip int, err error, format string, args ...interface{}) error {
 	if err == nil {
 		return nil
 	}
